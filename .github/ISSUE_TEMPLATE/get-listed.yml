@@ -1,0 +1,40 @@
+name: Get on the BROWSE list
+description: Ask for your mod to get an INSTALL button on the Mod Manager's BROWSE page.
+title: "List: "
+labels: ["listing"]
+body:
+  - type: markdown
+    attributes:
+      value: Your mod needs a GitHub release with a zip first (steps 1 to 4 of the README).
+  - type: input
+    id: name
+    attributes:
+      label: Mod name
+    validations:
+      required: true
+  - type: input
+    id: guid
+    attributes:
+      label: BepInPlugin GUID
+      placeholder: com.yourname.survivallog.bettermap
+    validations:
+      required: true
+  - type: input
+    id: github
+    attributes:
+      label: GitHub repository
+      placeholder: your-name/SurvivalLog-BetterMap
+    validations:
+      required: true
+  - type: input
+    id: dll
+    attributes:
+      label: DLL file name
+      placeholder: BetterMap.dll
+    validations:
+      required: true
+  - type: input
+    id: nexus
+    attributes:
+      label: Nexus page number (if it is on Nexus)
+      placeholder: "47"

@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>BetterMap</AssemblyName>
+    <!-- The release tag and the BepInPlugin version must both match this. -->
+    <Version>1.0.0</Version>
+    <LangVersion>latest</LangVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GameDir Condition="'$(GameDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Survival Log</GameDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="$(GameDir)\BepInEx\core\BepInEx.Core.dll" Private="false" />
+    <Reference Include="$(GameDir)\BepInEx\core\BepInEx.Unity.IL2CPP.dll" Private="false" />
+    <Reference Include="$(GameDir)\BepInEx\core\0Harmony.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- What the Mod Manager shows and checks. Only GitHub is needed for updates; the rest is optional. -->
+  <ItemGroup>
+    <AssemblyMetadata Include="ModManager.GitHub" Value="your-name/SurvivalLog-BetterMap" />
+    <AssemblyMetadata Include="ModManager.NexusId" Value="47" />
+    <AssemblyMetadata Include="ModManager.GameVersion" Value="1.1.20719" />
+    <AssemblyMetadata Include="ModManager.Name" Value="Better Map&#10;更好的地图" />
+    <AssemblyMetadata Include="ModManager.Description" Value="What the mod does.&#10;模组的作用。" />
+    <AssemblyMetadata Include="ModManager.Author" Value="Your name" />
+    <AssemblyMetadata Include="ModManager.Category" Value="Interface" />
+    <AssemblyMetadata Include="ModManager.Changelog" Value="https://github.com/your-name/SurvivalLog-BetterMap/blob/main/CHANGELOG.md" />
+  </ItemGroup>
+
+  <!-- A Release build also writes bin\Release\BetterMap-1.0.0.zip, holding BepInEx\plugins\BetterMap.dll: the zip to
+       attach to the GitHub release. -->
+  <Target Name="ReleaseZip" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <PropertyGroup>
+      <ZipStage>$(MSBuildProjectDirectory)\obj\release-zip\</ZipStage>
+    </PropertyGroup>
+    <RemoveDir Directories="$(ZipStage)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ZipStage)BepInEx\plugins\" />
+    <ZipDirectory SourceDirectory="$(ZipStage)" DestinationFile="$(OutDir)$(AssemblyName)-$(Version).zip" Overwrite="true" />
+  </Target>
+
+</Project>
