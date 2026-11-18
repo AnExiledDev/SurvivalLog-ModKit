@@ -102,4 +102,4 @@ When the game updates and your mod still works, you can say so without a new rel
 
 ## Questions
 
-Open an issue here, or ask on the Core Directive Discord: https://discord.gg/trTsyxUFqg
+Open an issue here, or ask in the [unofficial modding Discord for Survival Log](https://discord.gg/pDrQtqbZgb).
